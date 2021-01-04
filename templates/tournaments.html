@@ -1,0 +1,94 @@
+{% extends 'base.html' %} {% block head %} {% endblock %} {% block body %}
+<div class="tournaments">
+    <h1 style="text-align: center">Tornament</h1>
+    <header>
+        <table align="center">
+            <tr>
+                <th>
+                    <a href="/ ">
+                        <h2>Home</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/tournaments/ ">
+                        <h2>Tournaments</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/matchs/ ">
+                        <h2>Matchs</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/challengers/ ">
+                        <h2>Challengers</h2>
+                    </a>
+                </th>
+            </tr>
+        </table>
+    </header>
+    <table style="border-color: black">
+        <thead>
+            <th>Tournament</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </thead>
+        {% for tournament in Tournaments %}
+        <tbody>
+            <tr>
+                <td><a href="/tournaments/{{tournament.id}}">{{ tournament.name }}</a></td>
+                <td>{{ tournament.date_created.date() }}</td>
+                <td>
+                    <button>
+                    <a href="/tournaments/delete/{{tournament.id}}">Delete</a>
+                    </button>
+                    <br>
+                    <button>
+                    <a href="" onkeypress="openform()">Update</a>
+                    </button>
+                    <input type="value" name="tournament_update" id="tournament_update" placeholder="Tournament name" required> </input>
+                    <br>
+                    <table style="border:black border-size:1px">
+                        <h4 style="text-align:center">Join the tournament</h4>
+                        <div class="form-popup" id="myForm" name="form">
+                            <script>
+                                closeForm();
+                            </script>
+                            <form action="{{tournament.id}}/challenger/create" class="form-container" method="POST">
+                                <label for="email"><b>Challenger name: </b></label>
+                                <input type="value" name="challenger" id="challenger" placeholder="Challenger name" required>
+                                <input type="submit" value="Add challenger" class="btn">
+                                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+
+                            </form>
+                        </div>
+                    </table>
+                    <br>
+                    <script>
+                        function openForm() {
+                            document.getElementByName("myForm").style.display = "block";
+                        }
+
+                        function closeForm() {
+                            document.getElementByName("myForm").style.display = "none";
+                        }
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <h4>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
+    </h4>
+    <form action="/tournaments/" method="POST">
+        <input type="text" name="tournament" id="tournament">
+        <input type="submit" value="Add Tournament">
+    </form>
+</div>
+{% endblock %}
+
+</html>

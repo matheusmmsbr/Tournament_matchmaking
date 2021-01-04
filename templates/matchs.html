@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% block head %} {% endblock %} {% block body %}
+<div class="matchs">
+    <h1 style="text-align: center">Match</h1>
+    <header>
+        <table align="center">
+            <tr>
+                <th>
+                    <a href="/ ">
+                        <h2>Home</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/tournaments/ ">
+                        <h2>Tournaments</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/matchs/ ">
+                        <h2>Matchs</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/challengers/ ">
+                        <h2>Challengers</h2>
+                    </a>
+                </th>
+            </tr>
+        </table>
+    </header>
+    <table style="border-color: black">
+        {% for match in Matchs %}
+        <thead>
+            <th>Tournament</th>
+            <th>Match number</th>
+            <th>Challenger 1</th>
+            <th>Score 1</th>
+            <th>Challenger 2</th>
+            <th>Score 2</th>
+            <th>Status</th>
+        </thead>
+
+        <tbody style="text-align:center">
+            <tr>
+                <td><a href="">{{ match.tournaments.name }}</a></td>
+                <td>{{ match.match_number }}</td>
+                <td><a>{{ match.challenger_1 }}</a></td>
+                <td>
+                    <h5>{{ match.score_1 }}</h5>
+                </td>
+                <td>
+                    <a>{{ match.challenger_2 }}</a>
+                </td>
+                <td>
+                    <h5>{{ match.score_2 }}</h5>
+                </td>
+                <td>
+                    <h5>{{ match.status }}</h5>
+                </td>
+                <td>
+                    <a href="">Delete</a>
+                    <br>
+                    <a>Update</a>
+                    <form action="/tournaments/match/update/{{ match.id }}" method="POST">
+                        <table>
+                            <thead>
+                                <th>Match number</th>
+                                <th>challenger 1</th>
+                                <th>score 1</th>
+                                <th>challenger 2</th>
+                                <th>score 2</th>
+                                <th>status</th>
+                            </thead>
+                            <tbody>
+                                <td><input type="text" name="match" id="match" value="{{match.match_number}}"></td>
+
+                                <td> <input type="text" name="match" id="match" value="{{match.challenger_1}}"></td>
+
+                                <td><input type="text" name="match" id="match" value="{{match.score_1}}"></td>
+
+                                <td><input type="text" name="match" id="match" value="{{match.challenger_2}}"></td>
+
+                                <td><input type="text" name="match" id="match" value="{{match.score_2}}"></td>
+
+                                <td><input type="text" name="match" id="match" value="{{match.status}}"></td>
+
+                            </tbody>
+
+                        </table>
+                        <br>
+                        <input type="submit" value="update match">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    <h4>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
+    </h4>
+
+
+
+
+
+</div>
+{% endblock %}
+
+</html>

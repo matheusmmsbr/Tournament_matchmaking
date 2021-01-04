@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block head %} {% endblock %} {% block body %}
+<div class="challengers">
+    <h1 style="text-align: center">Challengers</h1>
+    <header>
+        <table align="center">
+            <tr>
+                <th>
+                    <a href="/ ">
+                        <h2>Home</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/tournaments/ ">
+                        <h2>Tournaments</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/matchs/ ">
+                        <h2>Matchs</h2>
+                    </a>
+                </th>
+                <th></th>
+                <th>
+                    <a href="/challengers/ ">
+                        <h2>Challengers</h2>
+                    </a>
+                </th>
+            </tr>
+        </table>
+    </header>
+    <table style="border-color: black">
+        <thead>
+            <th>Challenger</th>
+            <th>Tournament</th>
+            <th>Status</th>
+        </thead>
+        {% for challenger in Challengers %}
+        <tbody>
+            <tr>
+                <td>{{ challenger.name }}</td>
+                <td style="text-align: center; ">{{ challenger.tournaments2.name}}</td>
+                <td>
+                    <a href="/challenger/delete/{{challenger.id}} ">Delete</a>
+                    <br>
+                    <a href=" " ">Update</a>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+
+    <form action="/challengers/{{ id }} " method="POST ">
+        <input type="text " name="name " id="name ">
+		<input type="submit " value="update match ">
+    </form>
+</div>
+{% endblock %}
+<h4>
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
+</h4>
+
+</html>

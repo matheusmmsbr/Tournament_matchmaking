@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block head %} {% endblock %} {% block body %}
+<div class="index">
+    <h1 style="text-align: center">Main site</h1>
+
+    <table align="center" ">
+        <tr>
+            <th>
+                <a href="/ ">
+                    <h2>Home</h2>
+                </a>
+            </th>
+            <th></th>
+            <th>
+                <a href="/tournaments/ ">
+                    <h2>Tournaments</h2>
+                </a>
+            </th>
+            <th></th>
+            <th>
+                <a href="/matchs/ ">
+                    <h2>Matchs</h2>
+                </a>
+            </th>
+            <th></th>
+            <th>
+                <a href="/challengers/ ">
+                    <h2>Challengers</h2>
+                </a>
+            </th>
+        </tr>
+    </table>
+
+    <h4>
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {{ message }} {% endfor %} {% endif %} {% endwith %}
+    </h4>
+
+</div>
+{% endblock %}
+
+</html>
